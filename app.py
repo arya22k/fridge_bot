@@ -1,5 +1,7 @@
 from flask import Flask, request, jsonify
 import sqlite3
+import requests
+import os
 
 app = Flask(__name__)
 DB_NAME = "fridge.db"
