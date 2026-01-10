@@ -107,6 +107,34 @@ def bot():
     else:
         return jsonify({"response": f"Unknown command: {command}"}), 200
 
+fridges = [
+    {
+        "fridge_id": "FR-001",
+        "items": [
+            {"name": "Milk", "days_left": 3},
+            {"name": "Eggs", "days_left": 7}
+        ]
+    },
+    {
+        "fridge_id": "FR-002",
+        "items": [
+            {"name": "Cheese", "days_left": 5}
+        ]
+    }
+]
+
+@app.route("/admin")
+def admin_view():
+    html = "<h1>Admin View</h1>"
+
+    for fridge in fridges:
+        html += f"<h2>Fridge ID: {fridge['fridge_id']}</h2>"
+        html += "<ul>"
+        for item in fridge["items"]:
+            html += f"<li>{item['name']} — {item['days_left']} days until expiration</li>"
+        html += "</ul>"
+
+    return html
 
 if __name__ == "__main__":
     init_db()
